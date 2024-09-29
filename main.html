@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="coderell" content="width=device-width, initial-scale=1.0">
+    <title>Animated Website Landing Page</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="background"></div>
+
+        <div class="nav">
+            
+            <div class="menu">
+                <ul>
+                   <li>Protégeons notre planète</li>
+                </ul>
+            </div>
+            <div class="cart" >
+                <img src="iconer.png" alt="Custom Icon" class="static-icon" >
+            </div>
+        </div>
+
+        <div  class="earth">
+            <img src="earth1.png" alt="" class="centered-image" onclick="showReaction(event)">
+        </div>
+
+        <div class="blocks">
+            <div class="block-1">Save</div>
+            <div class="block-1"> </div>
+            <div class="block-1">Earth</div>
+        </div>
+
+        <div class="tag-line">
+            <span>cliquer sur l'image plusieurs fois !!! </span>
+        </div>
+
+        <div class="title">
+            <div class="title-container">
+                <div class="title-item">S</div>
+                <div class="title-item">.</div>
+                <div class="title-item">O</div>
+                <div class="title-item">.</div>
+                <div class="title-item">S</div>
+            </div>
+        </div>
+
+         <div class="content">
+        <p>Unis pour la Terre, protégeons notre demeure .<br> Combattons le changement climatique avec détermination et engagement.</p>
+        <button id="slideshowButton">Cliquer sur moi</button>
+        <div id="slideshowContainer">
+            <video src="video.mp4" controls  autoplay></video>
+        </div>
+    </div>
+        
+
+        <div class="media">
+            <ul>
+                <li>
+                    <ion-icon name="logo-facebook"></ion-icon>
+                </li>
+                <li>
+                    <ion-icon name="logo-instagram"></ion-icon>
+                </li>
+                <li>
+                    <ion-icon name="logo-twitter"></ion-icon>
+                </li>
+                <li>
+                    <ion-icon name="logo-youtube"></ion-icon>
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+    
+    <script>
+        TweenMax.to(".background", 2, {
+            width: "100%",
+            ease: Expo.easeInOut
+        })
+
+        TweenMax.from(".nav", 1.5, {
+            delay: 1.2,
+            opacity: 0,
+            y: 20,
+            ease: Expo.easeInOut
+        })
+
+        TweenMax.from(".blocks", 1.5, {
+            delay: 1.6,
+            opacity: 0,
+            x: -60,
+            ease: Expo.easeInOut
+        })
+
+        TweenMax.from(".tag-line", 1.5, {
+            delay: 2,
+            opacity: 0,
+            x: -80,
+            ease: Expo.easeInOut
+        })
+
+        TweenMax.from(".hero", 2, {
+            delay: 3,
+            opacity: 0,
+            x: 170,
+            ease: Expo.easeInOut
+        })
+
+        TweenMax.staggerFrom(".title-container > div", 3, {
+            delay: 4.4,
+            y: "500",
+            ease: Elastic.easeOut.config(2, 0.4)
+        }, 0.2)
+
+        TweenMax.from(".year", 1.5, {
+            delay: 6.2,
+            opacity: 0,
+            x: -40,
+            ease: Expo.easeInOut
+        })
+        TweenMax.from(".centered-image", 2, {
+    delay: 8, 
+    opacity: 0,
+    x: -50, 
+    ease: Expo.easeInOut
+});
+        TweenMax.from(".content p", 2, {
+            delay: 7,
+            opacity: 0,
+            y: 20,
+            ease: Expo.easeInOut
+        })
+
+        TweenMax.from(".content button", 2, {
+            delay: 7.2,
+            opacity: 0,
+            y: 20,
+            ease: Expo.easeInOut
+        })
+        
+        TweenMax.staggerFrom(".media ul li", 1.5, {
+            delay: 9,
+            opacity: 0,
+            x: -30,
+            ease: Expo.easeInOut
+        }, 0.08)
+        function showReaction(event) {
+            const reaction = document.createElement('img');
+            reaction.src = 'img.png'; 
+            reaction.classList.add('reaction');
+            
+            const x = event.clientX - 25; 
+            const y = event.clientY - 25;
+
+            reaction.style.left = `${x}px`;
+            reaction.style.top = `${y}px`;
+
+            document.body.appendChild(reaction);
+
+            
+            TweenMax.to(reaction, 1, { opacity: 0, y: -50, ease: Expo.easeOut, onComplete: () => {
+                document.body.removeChild(reaction);
+            } });
+        }
+        document.getElementById('slideshowButton').addEventListener('click', function () {
+            document.getElementById('slideshowContainer').style.display = 'flex';
+            const video = document.querySelector('.slideshow-video');
+            video.play();
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape') {
+                    document.getElementById('slideshowContainer').style.display = 'none';
+                    video.pause();
+                }
+            });
+        });
+    </script>
+    
+    
+</body>
+
+</html>
